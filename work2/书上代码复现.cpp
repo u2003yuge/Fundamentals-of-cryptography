@@ -80,15 +80,15 @@ int cnt[1<<4][1<<4];
 int maxp1,maxp2;
 unordered_map<int,bool>mp;
 int get(){
-	return rand()%(1<<16);
+	return rand()*rand()%(1<<16);
 }
 signed main(){
 	srand(time(0));
-	int T=30000;
-	int XX=0b0000101100000000;
+	int T=300;
+	int XX=0b0000101100000000;//0000101100001011;//0b0110000011110000;//0b1011101100001011;//
 	int x,x_,y,y_;
 	int count=0;
-	for(int i=0;i<T;i++){
+	for(int t=0;t<T;t++){
 		x=get();
 		while(mp.find(x)!=mp.end())
 			x=get();
@@ -106,10 +106,12 @@ signed main(){
 			continue;
 		count++;
 //		printf("%d\n",count);
+		int same1=0b0110;//0b0001;//0b1001;//0b0110
+		int same3=0b0110;//0b1010;//0b0110
 		for(int L1=0;L1<(1<<4);L1++)
 			for(int L2=0;L2<(1<<4);L2++)
-				if((simple_decrypt(Y[1],L1)^simple_decrypt(Y_[1],L1))==0b0110&&(simple_decrypt(Y[3],L2)^simple_decrypt(Y_[3],L2))==0b0110){
-					printf("%d %d\n",L1,L2); 
+				if((simple_decrypt(Y[1],L1)^simple_decrypt(Y_[1],L1))==same1&&(simple_decrypt(Y[3],L2)^simple_decrypt(Y_[3],L2))==same3){
+//					printf("%d %d\n",L1,L2); 
 					cnt[L1][L2]++;
 				}
 	}
